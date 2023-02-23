@@ -1,7 +1,7 @@
 import { Paddle } from './paddle.js';
 import { Ball } from './ball.js';
 
-const canvas = document.getElementById('canvas');
+const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
 const leftPaddle = new Paddle(20, canvas.height / 2 - 50, 10, 100, 'white');
