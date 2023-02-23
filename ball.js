@@ -1,9 +1,10 @@
 export class Ball {
-  constructor(x, y, radius, color) {
+  constructor(x, y, radius, color, canvas) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
+    this.canvas = canvas; // Store canvas as an instance variable
     this.dx = 5;
     this.dy = 5;
   }
