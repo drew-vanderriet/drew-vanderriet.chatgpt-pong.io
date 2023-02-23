@@ -21,11 +21,11 @@ export class Ball {
     this.x += this.dx;
     this.y += this.dy;
 
-    if (this.y < this.radius || this.y + this.radius > canvas.height) {
+    if (this.y < this.radius || this.y + this.radius > this.canvas.height) {
       this.dy = -this.dy;
     }
 
-    if (this.x < this.radius || this.x + this.radius > canvas.width) {
+    if (this.x < this.radius || this.x + this.radius > this.canvas.width) {
       this.dx = -this.dx;
     }
   }
