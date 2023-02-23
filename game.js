@@ -26,8 +26,9 @@ function updateGame() {
     const relativeIntersectY = leftPaddle.y + leftPaddle.height / 2 - ball.y;
     const normalizedRelativeIntersectionY = relativeIntersectY / (leftPaddle.height / 2);
     const bounceAngle = normalizedRelativeIntersectionY * MAX_BOUNCE_ANGLE;
-    ball.dx = -Math.cos(bounceAngle) * ball.speed;
+    ball.dx = Math.cos(bounceAngle) * ball.speed;
     ball.dy = -Math.sin(bounceAngle) * ball.speed;
+    ball.dx = -ball.dx;
   }
   // Check collision with right paddle
   else if (ball.x + ball.radius > rightPaddle.x &&
@@ -38,6 +39,7 @@ function updateGame() {
     const bounceAngle = normalizedRelativeIntersectionY * MAX_BOUNCE_ANGLE;
     ball.dx = -Math.cos(bounceAngle) * ball.speed;
     ball.dy = -Math.sin(bounceAngle) * ball.speed;
+    ball.dx = -ball.dx;
   }
   // Check for ball going past left paddle
   else if (ball.x - ball.radius < 0) {
