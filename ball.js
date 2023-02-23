@@ -7,6 +7,8 @@ export class Ball {
     this.canvas = canvas; // Store canvas as an instance variable
     this.dx = 5;
     this.dy = 5;
+    this.leftScore = 0; // New instance variable for left paddle score
+    this.rightScore = 0; // New instance variable for right paddle score
   }
 
   draw(ctx) {
