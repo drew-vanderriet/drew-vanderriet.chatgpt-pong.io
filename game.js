@@ -52,6 +52,24 @@ function updateGame() {
   ctx.font = '32px Arial';
   ctx.fillText(`Player 1: ${ball.leftScore}`, 32, 32);
   ctx.fillText(`Player 2: ${ball.rightScore}`, canvas.width - 200, 32);
+  
+  // move the AI paddle
+  aiMove();
+}
+
+function aiMove() {
+  // calculate the center of the ball and the paddle
+  const ballY = ball.y;
+  const paddleY = rightPaddle.y + rightPaddle.height / 2;
+
+  // move the paddle toward the ball
+  if (ballY < paddleY - 35) {
+    rightPaddle.dy = -5;
+  } else if (ballY > paddleY + 35) {
+    rightPaddle.dy = 5;
+  } else {
+    rightPaddle.dy = 0;
+  }
 }
 
 function keyDownHandler(event) {
@@ -73,6 +91,39 @@ function keyUpHandler(event) {
     rightPaddle.dy = 0;
   }
 }
+
+// Add touch event listeners to the canvas
+canvas.addEventListener('touchstart', touchStartHandler);
+canvas.addEventListener('touchmove', touchMoveHandler);
+canvas.addEventListener('touchend', touchEndHandler);
+
+// Define touch event handlers
+function touchStartHandler(event) {
+  event.preventDefault();
+  let touch = event.changedTouches[0];
+  if (touch.clientX < canvas.width / 2) {
+    // Player one touched the left side of the screen, move left paddle
+    leftPaddle.dragging = true;
+    leftPaddle.lastDragY = touch.clientY;
+  }
+}
+
+function touchMoveHandler(event) {
+  event.preventDefault();
+  let touch = event.changedTouches[0];
+  if (leftPaddle.dragging) {
+    // Move the left paddle based on the touch drag distance
+    let dy = touch.clientY - leftPaddle.lastDragY;
+    leftPaddle.y += dy;
+    leftPaddle.lastDragY = touch.clientY;
+  }
+}
+
+function touchEndHandler(event) {
+  event.preventDefault();
+  leftPaddle.dragging = false;
+}
+
 
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
