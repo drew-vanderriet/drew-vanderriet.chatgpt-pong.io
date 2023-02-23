@@ -7,6 +7,7 @@ const ctx = canvas.getContext('2d');
 const leftPaddle = new Paddle(20, canvas.height / 2 - 50, 10, 100, 'black', canvas);
 const rightPaddle = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 100, 'black', canvas);
 const ball = new Ball(canvas.width / 2, canvas.height / 2, 10, 'black', canvas);
+const MAX_BOUNCE_ANGLE = Math.PI / 2;
 
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -17,17 +18,28 @@ function updateGame() {
   rightPaddle.move();
   ball.move();
 
-  // Check for ball colliding with left paddle
+
+  // Check collision with left paddle
   if (ball.x - ball.radius < leftPaddle.x + leftPaddle.width &&
       ball.y + ball.radius > leftPaddle.y &&
       ball.y - ball.radius < leftPaddle.y + leftPaddle.height) {
-    ball.dx = -ball.dx;
-  } 
-  // Check for ball colliding with right paddle
+    const relativeIntersectY = leftPaddle.y + leftPaddle.height / 2 - ball.y;
+    const normalizedRelativeIntersectionY = relativeIntersectY / (leftPaddle.height / 2);
+    const bounceAngle = normalizedRelativeIntersectionY * MAX_BOUNCE_ANGLE;
+    ball.dx = Math.cos(bounceAngle) * ball.speed;
+    ball.dy = -Math.sin(bounceAngle) * ball.speed;
+    ball.dx = -ball.dx; // Change direction
+  }
+  // Check collision with right paddle
   else if (ball.x + ball.radius > rightPaddle.x &&
-             ball.y + ball.radius > rightPaddle.y &&
-             ball.y - ball.radius < rightPaddle.y + rightPaddle.height) {
-    ball.dx = -ball.dx;
+           ball.y + ball.radius > rightPaddle.y &&
+           ball.y - ball.radius < rightPaddle.y + rightPaddle.height) {
+    const relativeIntersectY = rightPaddle.y + rightPaddle.height / 2 - ball.y;
+    const normalizedRelativeIntersectionY = relativeIntersectY / (rightPaddle.height / 2);
+    const bounceAngle = normalizedRelativeIntersectionY * MAX_BOUNCE_ANGLE;
+    ball.dx = -Math.cos(bounceAngle) * ball.speed;
+    ball.dy = -Math.sin(bounceAngle) * ball.speed;
+    ball.dx = -ball.dx; // Change direction
   }
   // Check for ball going past left paddle
   else if (ball.x - ball.radius < 0) {
