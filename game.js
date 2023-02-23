@@ -4,9 +4,9 @@ import { Ball } from './ball.js';
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
-const leftPaddle = new Paddle(20, canvas.height / 2 - 50, 10, 100, 'white');
-const rightPaddle = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 100, 'white');
-const ball = new Ball(canvas.width / 2, canvas.height / 2, 10, 'white');
+const leftPaddle = new Paddle(20, canvas.height / 2 - 50, 10, 100, 'white', canvas);
+const rightPaddle = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 100, 'white', canvas);
+const ball = new Ball(canvas.width / 2, canvas.height / 2, 10, 'white', canvas);
 
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
