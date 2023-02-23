@@ -19,8 +19,8 @@ export class Paddle {
 
     if (this.y < 0) {
       this.y = 0;
-    } else if (this.y + this.height > canvas.height) {
-      this.y = canvas.height - this.height;
+    } else if (this.y + this.height > this.canvas.height) {
+      this.y = this.canvas.height - this.height;
     }
   }
 }
