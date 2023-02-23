@@ -1,10 +1,11 @@
 export class Paddle {
-  constructor(x, y, width, height, color) {
+  constructor(x, y, width, height, color, canvas) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.color = color;
+    this.canvas = canvas; // Store canvas as an instance variable
     this.dy = 0;
   }
 
