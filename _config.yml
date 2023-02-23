@@ -1,8 +1,8 @@
 # Site settings
-title: My Awesome Site
-description: A description of my awesome site
-baseurl: "/my-site" # the subpath of your site, e.g. /blog/ or /my-site
-url: "https://myusername.github.io" # the base hostname & protocol for your site
+title: ChatGPT Pong
+description: A pong game coded exclusively by ChatGPT
+baseurl: "/drew-vanderriet.chatgpt-pong.io" # the subpath of your site, e.g. /blog/ or /my-site
+url: "https://drew-vanderriet.github.io" # the base hostname & protocol for your site
 
 # Build settings
 theme: jekyll-theme-slate # the theme you're using
