@@ -126,6 +126,15 @@ function touchEndHandler(event) {
   leftPaddle.dragging = false;
 }
 
+window.addEventListener('resize', function() {
+  // Get the updated canvas size
+  const canvas = document.getElementById('game-canvas');
+  canvas.width = window.innerWidth * 0.9;
+  canvas.height = window.innerHeight * 0.9;
+  
+  // Update the position of the right paddle
+  rightPaddle.x = canvas.width - 30;
+});
 
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
