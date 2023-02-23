@@ -23,7 +23,7 @@ function updateGame() {
     ball.dx = -ball.dx;
   } else if (ball.x + ball.radius > rightPaddle.x &&
              ball.y + ball.radius > rightPaddle.y &&
-             ball.y - ball.radius < rightPaddle.y + rightPaddle.height)
+             ball.y - ball.radius < rightPaddle.y + rightPaddle.height) {
     ball.dx = -ball.dx;
   }
 
