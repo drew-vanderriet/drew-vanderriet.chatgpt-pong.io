@@ -48,7 +48,7 @@ function updateGame() {
   ball.draw(ctx);
 
   // Display scores on screen
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = 'black';
   ctx.font = '32px Arial';
   ctx.fillText(`Player 1: ${ball.leftScore}`, 32, 32);
   ctx.fillText(`Player 2: ${ball.rightScore}`, canvas.width - 200, 32);
