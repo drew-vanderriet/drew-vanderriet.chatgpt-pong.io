@@ -13,8 +13,6 @@ function clearCanvas() {
 }
 
 function updateGame() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
   leftPaddle.move();
   rightPaddle.move();
   ball.move();
@@ -126,17 +124,22 @@ function touchEndHandler(event) {
   leftPaddle.dragging = false;
 }
 
-window.addEventListener('resize', function() {
-  // Get the updated canvas size
-  const canvas = document.getElementById('game-canvas');
+function resizeWindow() {
   canvas.width = window.innerWidth * 0.9;
   canvas.height = window.innerHeight * 0.9;
   
   // Update the position of the right paddle
   rightPaddle.x = canvas.width - 30;
+}
+
+window.addEventListener('resize', function() {
+  // Update the canvas size to fit the screen
+  resizeWindow();
 });
 
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
+
+resizeWindow();
 
 setInterval(updateGame, 10);
