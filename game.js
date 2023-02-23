@@ -13,6 +13,8 @@ function clearCanvas() {
 }
 
 function updateGame() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   leftPaddle.move();
   rightPaddle.move();
   ball.move();
