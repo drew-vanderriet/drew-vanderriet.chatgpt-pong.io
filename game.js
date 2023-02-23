@@ -17,20 +17,41 @@ function updateGame() {
   rightPaddle.move();
   ball.move();
 
+  // Check for ball colliding with left paddle
   if (ball.x - ball.radius < leftPaddle.x + leftPaddle.width &&
       ball.y + ball.radius > leftPaddle.y &&
       ball.y - ball.radius < leftPaddle.y + leftPaddle.height) {
     ball.dx = -ball.dx;
-  } else if (ball.x + ball.radius > rightPaddle.x &&
+  } 
+  // Check for ball colliding with right paddle
+  else if (ball.x + ball.radius > rightPaddle.x &&
              ball.y + ball.radius > rightPaddle.y &&
              ball.y - ball.radius < rightPaddle.y + rightPaddle.height) {
     ball.dx = -ball.dx;
+  }
+  // Check for ball going past left paddle
+  else if (ball.x - ball.radius < 0) {
+    ball.rightScore++; // Increment right paddle score
+    ball.x = canvas.width / 2; // Reset ball position
+    ball.y = canvas.height / 2;
+  }
+  // Check for ball going past right paddle
+  else if (ball.x + ball.radius > canvas.width) {
+    ball.leftScore++; // Increment left paddle score
+    ball.x = canvas.width / 2; // Reset ball position
+    ball.y = canvas.height / 2;
   }
 
   clearCanvas();
   leftPaddle.draw(ctx);
   rightPaddle.draw(ctx);
   ball.draw(ctx);
+
+  // Display scores on screen
+  ctx.fillStyle = 'white';
+  ctx.font = '32px Arial';
+  ctx.fillText(`Player 1: ${ball.leftScore}`, 32, 32);
+  ctx.fillText(`Player 2: ${ball.rightScore}`, canvas.width - 200, 32);
 }
 
 function keyDownHandler(event) {
